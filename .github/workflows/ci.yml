@@ -24,9 +24,8 @@ jobs:
         run: echo "HEROKU_APP_NAME-${{ secrets.HEROKU_APP_NAME }}"
 
       - name: Deploy to  Heroku
-        env:
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-          HEROKU_APP_NAME: ${{ secrets.HEROKU_API_KEY }}
-        run: |
-          git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
-          git push heroku main -f
+          HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
